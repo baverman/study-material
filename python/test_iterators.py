@@ -8,7 +8,7 @@ from solve import *
 
 
 def test_random_iterator():
-    # Реализовать random_iterator, который возвращает случайные числа
+    # Реализовать random_iterator(), который возвращает случайные числа
     # от 0 до 1.
 
     count = 100000
@@ -34,3 +34,13 @@ def test_pair_iterator():
     seq = itertools.count()
     result = list(itertools.islice(pair_iterator(seq), 100))
     assert result == [(r*2, r*2+1) for r in xrange(100)]
+
+
+def test_group_iterator():
+    # Реализовать group_iterator(seq) который схлопывает
+    # одинаковые подряд идущие элементы в пары, (el, count)
+
+    seq = itertools.chain.from_iterable([r]*r for r in itertools.count())
+    result = list(group_iterator(itertools.islice(seq, 100)))
+    expected = [(r, r) for r in xrange(1, 14)] + [(14, 9)]
+    assert result == expected
