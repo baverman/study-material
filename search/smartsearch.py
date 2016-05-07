@@ -39,7 +39,7 @@ def get(ids, index='test-index'):
     if not ids:
         return {}
 
-    return {r['_id']: r['found']
+    return {r['_id']: r.get('found')
             for r in es.mget(index=index, body={'ids': ids})['docs']}
 
 
